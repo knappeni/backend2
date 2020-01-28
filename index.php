@@ -13,10 +13,6 @@
     <?php include 'navbar.php'?>
 <?php
 
-    $conn = mysqli_connect("localhost","knappe","password","projekt2");
-    if(!$conn){
-        echo "Connection error:" . mysqli_connect_error();
-    }
    
 ?>
 </body>
