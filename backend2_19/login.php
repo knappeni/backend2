@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<?php   
+// Sessionshantering
+session_start();
+?>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PHP Projekt 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+</head>
+<body>
+<h1>Logga In</h1>
+<?php include("navbar.php"); ?>
+
+<section>
+<form action="login.php" method="POST">
+Användarnamn:   <input type="text" name="anvnamn" autofocus required/><br>
+Lösenord:       <input type="text" name="losen" required/><br>
+<input type="submit" name="loggain" value="Logga in" />
+
+<?php
+include("handyfunctions.php"); 
+if(isset($_SESSION['username'])){
+    //om man redan är inloggad
+    header("Location:index.php");
+}
+else{
+// Create & check connection
+$conn = create_conn();
+//Om man klickat logga in
+if (isset($_POST['loggain'])) {
+    // Input validation
+    $anvnamn = test_input($_POST['anvnamn']);
+    $losen = test_input($_POST['losen']);
+    $losen = hash("sha256",$losen);
+
+    // Kolla ifall användaren redan finns
+    $sql = "SELECT * FROM users WHERE namn='$anvnamn';";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if($losen == strtolower($row['losen']) && $row['status'] == 'verifierad'){    
+            
+            $_SESSION['roll'] = $row['roll'];
+            $_SESSION['username'] = $row['namn'];
+          
+        //print("<p>Användaren finns!<br>");
+       
+        
+        // Rollhantering
+        print("<br>Du loggade in som: ".$_SESSION['username']."<br>");
+        print("Du har rollen: ".$_SESSION['roll']."<br>");
+        print("Sidan omredigerar dig till framsidan om 3 sekunder.</p>");
+        header("refresh:3;url=index.php");
+
+       
+       
+        }
+        else {
+            if ($row['status'] != 'verifierad') {
+            print("<p>Ditt användarkonto har inte verifierats, kolla din e-post (kom ihåg att kolla spam-filtret)</p>");
+        }
+        else{
+            print("<p>Fel Användarnamn eller lösenord!</p>");
+        }
+    }
+}    
+$conn->close();
+}
+else {
+    print("<p>Var god fyll i dina inloggningsuppgifter</p>");
+}
+}
+?>
+</section>
+</body>
+</html>

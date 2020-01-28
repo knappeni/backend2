@@ -1,0 +1,32 @@
+body{
+    background-color: lightgrey;
+
+}
+section{
+    padding: 10px 0;
+
+
+}ul{
+    
+    padding: 10px 0;
+    background-color:gray;
+
+
+}li{
+    display:inline;
+
+
+}li a{
+
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 10px 0;
+
+
+}li a:hover{
+    text-decoration: underline;
+}h1{
+    padding: 10 px;
+    color: black;
+}
