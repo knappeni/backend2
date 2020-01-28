@@ -9,16 +9,19 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PHP Projekt 2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 <body>
 <h1>Logga In</h1>
 <?php include("navbar.php"); ?>
 
 <section>
+
 <form action="login.php" method="POST">
-Användarnamn:   <input type="text" name="anvnamn" autofocus required/><br>
-Lösenord:       <input type="text" name="losen" required/><br>
+Användarnamn:<br>
+<input type="text" name="anvnamn" autofocus required/><br>
+Lösenord:<br>
+<input type="text" name="losen" required/><br><br>
 <input type="submit" name="loggain" value="Logga in" />
 
 <?php

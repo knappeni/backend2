@@ -9,9 +9,9 @@ function test_input($data) {
   }
 function create_conn(){
 $servername = "localhost";
-$username = "mutkajoa";
-$password ="DM8J2ZFGnG";
-$dbname ="mutkajoa";
+$username = "test";
+$password ="password";
+$dbname ="projekt2";
 $conn = new mysqli($servername,$username,$password,$dbname);
 $conn->set_charset('utf8');
       if($conn->connect_error){
