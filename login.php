@@ -26,11 +26,10 @@ Lösenord:<br>
 
 <?php
 include("handyfunctions.php"); 
-if(isset($_SESSION['username'])){
+if (isset($_SESSION['username'])) {
     //om man redan är inloggad
     header("Location:index.php");
-}
-else{
+} else {
 // Create & check connection
 $conn = create_conn();
 //Om man klickat logga in
@@ -45,37 +44,27 @@ if (isset($_POST['loggain'])) {
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        if($losen == strtolower($row['losen']) && $row['status'] == 'verifierad'){    
-            
+        if ($losen == strtolower($row['losen']) && $row['status'] == 'verifierad') {
             $_SESSION['roll'] = $row['roll'];
             $_SESSION['username'] = $row['namn'];
-          
-        //print("<p>Användaren finns!<br>");
-       
-        
-        // Rollhantering
-        print("<br>Du loggade in som: ".$_SESSION['username']."<br>");
-        print("Du har rollen: ".$_SESSION['roll']."<br>");
-        print("Sidan omredigerar dig till framsidan om 3 sekunder.</p>");
-        header("refresh:3;url=index.php");
 
-       
-       
-        }
-        else {
-            if ($row['status'] != 'verifierad') {
+            // Rollhantering
+            print("<br>Du loggade in som: ".$_SESSION['username']."<br>");
+            print("Du har rollen: ".$_SESSION['roll']."<br>");
+            print("Sidan omredigerar dig till framsidan om 3 sekunder.</p>");
+            header("refresh:3;url=index.php");
+        } elseif ($losen != strtolower($row['losen'])) {
+            print("<p>Fel Användarnamn eller lösenord!</p>");
+        } elseif ($losen == strtolower($row['losen']) && $row['status'] != 'verifierad') {
             print("<p>Ditt användarkonto har inte verifierats, kolla din e-post (kom ihåg att kolla spam-filtret)</p>");
         }
-        else{
-            print("<p>Fel Användarnamn eller lösenord!</p>");
-        }
+    } else {
+        print("<p>Fel Användarnamn eller lösenord!</p>");
     }
-}    
-$conn->close();
-}
-else {
-    print("<p>Var god fyll i dina inloggningsuppgifter</p>");
-}
+    $conn->close();
+    } else {
+        print("<p>Var god fyll i dina inloggningsuppgifter</p>");
+    }
 }
 ?>
 </section>
