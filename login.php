@@ -49,7 +49,7 @@ if (isset($_POST['loggain'])) {
             $_SESSION['username'] = $row['namn'];
 
             // Rollhantering
-            print("<br>Du loggade in som: ".$_SESSION['username']."<br>");
+            print("<br><p>Du loggade in som: ".$_SESSION['username']."<br>");
             print("Du har rollen: ".$_SESSION['roll']."<br>");
             print("Sidan omredigerar dig till framsidan om 3 sekunder.</p>");
             header("refresh:3;url=index.php");
