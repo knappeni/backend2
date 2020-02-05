@@ -23,7 +23,7 @@ Användarnamn:<br>
 <input type="text" name="anvnamn" autofocus required/><br>
 Lösenord:<br>
 <input type="password" name="losen" required/><br><br>
-<input type="submit" name="loggain" value="Logga in" />
+<input type="submit" name="loggain" value="Logga in"/>
 
 <?php
 

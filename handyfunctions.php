@@ -33,4 +33,13 @@ function update_files_inDB($filnamn) {
   $conn->query($sql);
   $conn->close();
 }
+
+function delete_annons($annons_id) {
+  #print($annons_id);
+  $conn = create_conn();
+  #$sqldel = "DELETE FROM loppis WHERE id='$annons_id';";
+  #$resultdel = $conn->query($sqldel);
+  $conn->close();
+  #header("Refresh:0");
+}
 ?>
