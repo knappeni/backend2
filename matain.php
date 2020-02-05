@@ -14,7 +14,7 @@ include("smallnavbar.php");
     <script src="main.js"></script>
 </head>
 <body>
-<h1>Projekt 2</h1>
+<h1>Här kan du skapa en ny annons</h1>
 <?php include "navbar.php" ?>
 <section>
     <p>Här kan du göra nya Loppis-annonser</p>
