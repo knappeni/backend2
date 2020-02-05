@@ -16,53 +16,59 @@
 <?php include "navbar.php" ?>
 <section>
     <p>Här kan du göra nya Loppis-annonser</p>
-    <?php
-      if (isset($_SESSION['username'])) {
-        print("<article>
-        <form action='matain.php' method='POST'>
-        Säljare: ".$_SESSION['username']."<br>
-        Rubrik:<br>
-        <input type='text' name='rubrik'><br>
-        Beskrivning:<br>
-        <input type='text' name='beskrivning'><br>
-        Pris:<br>
-        <input type='text' name='pris'><br>
-        <input type='submit' name='matain' value='Mata in'>
-        </form><br>
-        </article>");
+<?php
+  if (isset($_SESSION['username'])) {
+    print("<article>
+    <form action='matain.php' method='POST'>
+    Säljare: ".$_SESSION['username']."<br>
+    Rubrik:<br>
+    <input type='text' name='rubrik'><br>
+    Beskrivning: (max 300 tecken)<br>
+    <input type='text' name='beskrivning'><br>
+    Pris:<br>
+    <input type='text' name='pris'><br>
+    <input type='submit' name='matain' value='Mata in'>
+    </form><br>
+    </article>");
+  } else {
+    print("<p>Du måste vara inloggad för att kunna göra annonser</p>");
+  }
+  $conn = create_conn();
+  if ($conn->connect_error) {
+    die("<p>CONNECTION FAILED: ".$conn->connect_error."</p>");
+  }
+  if (isset($_POST['matain'])) {
+    $rubrik = test_input($_POST['rubrik']);
+    $beskrivning = test_input($_POST['beskrivning']);
+    $saljare = $_SESSION['username'];
+    $pris = test_input($_POST['pris']);
+    if ($rubrik == "") {
+      print("Din annons måste ha en rubrik!");
+    } elseif ($beskrivning == "") {
+      print("Din annons måste ha en beskrivning!");
+    } elseif (strlen($beskrivning) > 300) {
+      print("Din beskrivning är över 300 tecken!");
+    } elseif ($pris == "") {
+      print("Din annons måste ha ett pris!");
+    } else {
+      $pris = str_replace(",", ".", $pris);
+      if (is_numeric($pris)) {
+        $pris = (float)$pris;
+        $sql = "INSERT INTO loppis (saljare,rubrik,beskrivning,pris)
+        VALUES('$saljare','$rubrik','$beskrivning','$pris');";
+        $result = $conn->query($sql);
+        if ($conn->affected_rows > 0) {
+            print("<p>Inamtning lyckades!</p>");
+        } else {
+            print("<p>Inmatning lyckades inte!</p>");
+        }
       } else {
-        print("<p>Du måste vara inloggad för att kunna göra annonser</p>");
+        print("Priset kan bara innehålla siffror och en punkt eller ett komma!");
       }
-      $conn = create_conn();
-      if ($conn->connect_error) {
-        die("<p>CONNECTION FAILED: ".$conn->connect_error."</p>");
-      }
-      if (isset($_POST['matain'])) {
-
-          $rubrik = test_input($_POST['rubrik']);
-          $beskrivning = test_input($_POST['beskrivning']);
-          $saljare = $_SESSION['username'];
-          $pris = test_input($_POST['pris']);
-          $datum = date("Y-m-d H:i:s");
-          if ($rubrik == "") {
-            print("Din annons måste ha en rubrik!");
-          } elseif ($beskrivning == "") {
-            print("Din annons måste ha en beskrivning!");
-          } elseif ($rubrik != "") {
-            print("Din annons måste ha ett pris!");
-          } else {
-          $sql = "INSERT INTO loppis (rubrik,beskrivning,saljare,pris,datum)
-          VALUES('$rubrik','$beskrivning','$saljare','$pris','$datum');";
-          $result = $conn->query($sql);
-          if ($conn->affected_rows >0) {
-              print("<p>Inamtning lyckades!</p>");
-          } else {
-              print("<p>Inmatning lyckades inte!</p>");
-            }
       $conn->close();
     }
   }
-    ?>
+?>
 </section>
 </body>
 </html>
