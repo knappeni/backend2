@@ -17,13 +17,11 @@ include("smallnavbar.php");
 
 <body>
     <?php include("navbar.php"); ?>
-    <h1>Sök användare med hjälp av AJAX</h1>
+    <h1>Sök annonser med hjälp av AJAX</h1>
     <section>
         <div class="input-group">
             <span class="input-group-addon">Sök med rubrik eller beskrivning</span>
             <input type="text" name="search_text" id="search_text" placeholder="Rubrik eller beskrivning" class="form-control"/>
-            <!--<span class="input-group-addon">Sök med användarnamn</span>-->
-            <!--<input type="text" name="search_text" id="search_text" placeholder="Rubrik" class="form-control" />-->
         </div>
         <div id="result"></div>
     </section>
@@ -37,7 +35,7 @@ include("smallnavbar.php");
 
         function load_data(query) {
             $.ajax({
-                url: "test.php",
+                url: "fetch.php",
                 method: "POST",
                 data: {
                     query: query

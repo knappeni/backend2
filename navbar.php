@@ -8,16 +8,14 @@
                 <a href='lista.php'>Användare</a>
                 <a href='annonser.php'>Annonser</a>
                 <a href='matain.php'>Ny annons</a>
-                <a href='ajax.php'>Sök annonser</a>
-                <a href='logout.php'>Logga ut</a>");
+                <a href='ajax.php'>Sök annonser</a>");
             } elseif ($_SESSION['roll'] == 'editor') {
                 print("
                 <a href='index.php'>Home</a>
                 <a href='lista.php'>Användare</a>
                 <a href='annonser.php'>Annonser</a>
                 <a href='matain.php'>Ny annons</a>
-                <a href='ajax.php'>Sök annonser</a>
-                <a href='logout.php'>Logga ut</a>");
+                <a href='ajax.php'>Sök annonser</a>");
             } elseif ($_SESSION['roll'] == 'admin') {
                 print("
                 <a href='index.php'>Home</a>
@@ -25,8 +23,7 @@
                 <a href='annonser.php'>Annonser</a>
                 <a href='matain.php'>Ny annons</a>
                 <a href='radera.php'>Radera</a>
-                <a href='ajax.php'>Sök annonser</a>
-                <a href='logout.php'>Logga ut</a>");
+                <a href='ajax.php'>Sök annonser</a>");
             }
     } else {
         print("
