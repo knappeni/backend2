@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-session_start();
+include("handyfunctions.php"); 
 ?>
 <html>
 <head>
@@ -26,13 +26,13 @@ session_start();
     Epost:<br>
     <input type='text' name='epost'><br>
     Lösenord:(8-256 tecken)<br>
-    <input type='text' name='losen'><br>
+    <input type='password' name='losen'><br>
     Bekräfta lösenord:<br>
-    <input type='text' name='losen1'><br><br>
+    <input type='password' name='losen1'><br><br>
     <input type='submit' name='registrera' value='Registrera dig'>
     </form>        
     </article>");
-    include("handyfunctions.php");
+    
     $conn = create_conn();
     
     if(isset($_POST['registrera'])) {
@@ -63,7 +63,7 @@ session_start();
             ;
         } else {
           if (filter_var($epost, FILTER_VALIDATE_EMAIL)&& $losen_hash == $losen1_hash) {
-            $hash = hash(sha256,rand(0,1000));      
+            $hash = hash('sha256',rand(0,1000));      
             $sql = "INSERT INTO users (namn,losen,epost,roll,hash,status)
             VALUES('$anvnamn','$losen_hash','$epost','$roll','$hash','$status');";
             $result_user = $conn->query($sql);

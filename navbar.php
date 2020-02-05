@@ -10,7 +10,7 @@
                 <a href='matain.php'>Mata in</a>
                 <a href='ajax.php'>Ajax</a>
                 <a href='logout.php'>Logga ut</a>
-                <div class='loggedDiv'>Logged in as ".$_SESSION['username']."</div>");
+                <a href='profil.php?user=".$_SESSION['username']."'>Logged in as ".$_SESSION['username']."</a>");
             } elseif ($_SESSION['roll'] == 'editor') {
                 print("
                 <a href='index.php'>Home</a>
@@ -19,7 +19,7 @@
                 <a href='matain.php'>Mata in</a>
                 <a href='ajax.php'>Ajax</a>
                 <a href='logout.php'>Logga ut</a>
-                <div class='loggedDiv'>Logged in as ".$_SESSION['username']."</div>");
+                <a href='profil.php?user=".$_SESSION['username']."'>Logged in as ".$_SESSION['username']."</a>");
             } elseif ($_SESSION['roll'] == 'admin') {
                 print("
                 <a href='index.php'>Home</a>
@@ -29,7 +29,7 @@
                 <a href='radera.php'>Radera</a>
                 <a href='ajax.php'>Ajax</a>
                 <a href='logout.php'>Logga ut</a>
-                <div class='loggedDiv'>Logged in as ".$_SESSION['username']."</div>");
+                <a href='profil.php?user=".$_SESSION['username']."'>Logged in as ".$_SESSION['username']."</a>");
             }
     } else {
         print("

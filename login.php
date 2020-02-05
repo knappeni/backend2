@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php   
 // Sessionshantering
-session_start();
+include("handyfunctions.php"); 
 ?>
 <html>
 <head>
@@ -21,11 +21,11 @@ session_start();
 Användarnamn:<br>
 <input type="text" name="anvnamn" autofocus required/><br>
 Lösenord:<br>
-<input type="text" name="losen" required/><br><br>
+<input type="password" name="losen" required/><br><br>
 <input type="submit" name="loggain" value="Logga in" />
 
 <?php
-include("handyfunctions.php"); 
+
 if (isset($_SESSION['username'])) {
     //om man redan är inloggad
     header("Location:index.php");
@@ -47,6 +47,7 @@ if (isset($_POST['loggain'])) {
         if ($losen == strtolower($row['losen']) && $row['status'] == 'verifierad') {
             $_SESSION['roll'] = $row['roll'];
             $_SESSION['username'] = $row['namn'];
+            $_SESSION['ip'] = $_SERVER["REMOTE_ADDR"];
 
             // Rollhantering
             print("<br><p>Du loggade in som: ".$_SESSION['username']."<br>");
