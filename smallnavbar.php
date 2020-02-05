@@ -3,12 +3,10 @@
     if (isset($_SESSION['username'])) {
         print("
         <div class='loggedDiv'>
-        Loggad in som: ".$_SESSION['username']."
-        <a href='profil.php'>Min profil</a>
-        <a href='logout.php'>Logga ut</a></div>");
+        Loggad in som: <b>".$_SESSION['username']."</b>
+        <u><a href='profil.php'>Min profil</a></u>
+        <u><a href='logout.php'>Logga ut</a></u></div>");
 
-    } else {
-        print("Inte loggad in");
     }
 ?>
 </nav>
