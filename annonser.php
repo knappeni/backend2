@@ -13,6 +13,7 @@ include("smallnavbar.php");
     <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
 </head>
 <body>
+    <h1>Hej</h1>
 <?php include("navbar.php"); ?>
 
 <section>
