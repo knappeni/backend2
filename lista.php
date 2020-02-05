@@ -18,7 +18,7 @@ include("handyfunctions.php");
 
 
 <?php
-    if(isset($_SESSION['username']) && $_SESSION['roll'] == 'user'){
+    if (isset($_SESSION['username']) && $_SESSION['roll'] == 'user') {
         print("<p>Här är alla användare som är registrerade till sidan.<br>
         Klicka på användarnamnet för att visa användarens annonser.</p>");
     // Inloggningsuppgifterna och databasen
@@ -36,7 +36,7 @@ include("handyfunctions.php");
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // output data of each row
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $sql1 = "SELECT * FROM loppis WHERE saljare='".$row['namn']."';";
             $rows = $conn->query($sql1);
             print("<p>Användarnamn: <a href='annonser.php?user=".$row['namn']."'>".$row['namn']."</a> <br>
@@ -50,8 +50,7 @@ include("handyfunctions.php");
         }
         // Kom ihåg att stänga databasuppkopplingen
         $conn->close();
-    }
-    elseif(isset($_SESSION['username']) && $_SESSION['roll'] == 'admin'){
+    } elseif (isset($_SESSION['username']) && $_SESSION['roll'] == 'admin') {
         print("<p>Här är alla användare som är registrerade till sidan.<br>
         Klicka på användarnamnet för att visa användarens annonser.</p>");
     // Inloggningsuppgifterna och databasen
@@ -69,7 +68,7 @@ include("handyfunctions.php");
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // output data of each row
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $sql1 = "SELECT * FROM loppis WHERE saljare='".$row['namn']."';";
             $rows = $conn->query($sql1);
             print("<p>Användarnamn: <a href='annonser.php?user=".$row['namn']."'>".$row['namn']."</a> <br>
@@ -83,9 +82,7 @@ include("handyfunctions.php");
         }
         // Kom ihåg att stänga databasuppkopplingen
         $conn->close();
-    }
-
-    else{
+    } else {
         print("<p>Du måste vara inloggad för att kunna se innehållet på den här sidan</p>");
     }
 

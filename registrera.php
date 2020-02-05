@@ -35,7 +35,7 @@ include("handyfunctions.php");
     
     $conn = create_conn();
     
-    if(isset($_POST['registrera'])) {
+    if (isset($_POST['registrera'])) {
       $anvnamn = test_input($_POST['anvnamn']);
       $losen = test_input($_POST['losen']);
       $losen_hash = hash("sha256",$losen);
