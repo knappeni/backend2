@@ -2,6 +2,7 @@
 <?php
 // Sessionshantering
 include("handyfunctions.php");
+include("smallnavbar.php");
 ?>
 <html>
 <head>
