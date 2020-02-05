@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <?php
-session_start();
+// Sessionshantering
+include("handyfunctions.php");
 ?>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-		
     
 </head>
 <body>
@@ -19,8 +18,10 @@ session_start();
 <?php include("navbar.php"); ?>
 <section>
 <div class="input-group">
-		<span class="input-group-addon">Search</span>
-		<input type="text" name="search_text" id="search_text" placeholder="Sök med användarnamn eller epost" class="form-control" />
+		<span class="input-group-addon">Sök med användarnamn</span>
+		<input type="text" name="search_text" id="search_text" placeholder="Användarnamn" class="form-control"/>
+        <span class="input-group-addon">eller med rubrik</span>
+		<input type="text" name="search_text" id="search_text" placeholder="Rubrik" class="form-control"/>
 </div>
 <div id="result"></div>
 

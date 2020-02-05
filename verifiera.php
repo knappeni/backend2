@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <?php
+// Sessionshantering
 include("handyfunctions.php");
 ?>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
     <script src="main.js"></script>
 </head>
 <body>
 <h1>Verifierings-sida</h1>
 
 <section>
-    
-
     <?php
-      
-       
-     
        if(isset($_GET['epost']) && !empty($_GET['epost']) && isset($_GET['hash']) && !empty($_GET['hash'])){
         // Verify data
         
