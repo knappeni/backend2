@@ -18,7 +18,7 @@ include("smallnavbar.php");
     <?php include 'navbar.php'?>
 <?php
     if (isset($_SESSION['username'])) {
-        print("<p>Välkommen till Jockes Loppis Sida. Man kan laga annonser, och se en lista på användare.<br>
+        print("<p>Välkommen till Jockes och Knappes Loppis Sida. Man kan laga annonser, och se en lista på användare.<br>
         Använd linkarna i nav-baren för att navigera.</p>");
     } else {
         print("<p>Välkommen, du har inte loggat in. <br>
