@@ -5,18 +5,26 @@ include("handyfunctions.php");
 ?>
 <html>
 <head>
-    <meta charset="utf-8"/>>
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php print($_SESSION['username'])?> profil</title>
+    <title><?php if(isset($_SESSION['username'])){
+                 if(!isset($_GET['user']) || $_SESSION['username'] == $_GET['user'] ){ print($_SESSION['username']."s profil");}
+                 else{print($_GET['user']."s profil");}}
+                 else{print("Inte Inloggad");}?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
 </head>
 <body>
-<h1>Din Profil</h1>
+<h1><?php if(isset($_SESSION['username'])){
+                 if(!isset($_GET['user']) || $_SESSION['username'] == $_GET['user'] ){ print($_SESSION['username']."s profil");}
+                 else{print($_GET['user']."s profil");}}
+                 else{print("Inte Inloggad");}?></h1>
 <?php 
 include("navbar.php"); 
 if(isset($_SESSION['username'])){
-    
+    //Om man är inloggad, kolla ifall det bara är profil.php i URL eller om $_GET['user'] är samma som
+    //inloggad användare. Laddar inloggade användarens egna profil
+    $user = test_input($_GET['user']);
     if(!isset($_GET['user']) || $_SESSION['username'] == $_GET['user'] ){
         
         $conn = create_conn();
@@ -42,16 +50,18 @@ if(isset($_SESSION['username'])){
                         </p>");
             };
             $conn->close();
+            //TODO lägg till funktionalitet för att uppdatera profildata
     }}
+    //ifall $_GET['user'] är annat än inloggade användaren, ladda $_GET['user'] profil
     else {
         $conn = create_conn();
         // Check connection
         if ($conn->connect_error) {
             die("<p>Connection failed: " . $conn->connect_error."</p>");
         } 
-           
+          
             // Uppkoppling ok, kör SQL kommandon härefter:
-         $sql = "SELECT * FROM users WHERE namn='". $_GET['user'] ."';";
+         $sql = "SELECT * FROM users WHERE namn='". $user ."';";
         
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
