@@ -8,19 +8,26 @@ body {
 .loggedDiv {
   float: right;
   text-decoration: none;
-  font-size: xx-large;
+  font-size: large;
   color: black;
+  margin: 0;
 }
-nav {
-    background-color: rgb(226, 86, 86);
-    padding: 10px;
+
+#smallnavbar {
+    text-decoration: none;
+    display: contents;
+}
+
+#navbar {
+  background-color: rgb(226, 86, 86);
+  font-size: xx-large;
+  padding: 10px;
 }
 
 nav a {
     text-decoration: none;
-    font-size: xx-large;
     color: black;
-    padding: 20px;
+    margin: 20px;
 }
 li {
     
