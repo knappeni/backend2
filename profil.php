@@ -25,8 +25,9 @@ include("navbar.php");
 if(isset($_SESSION['username'])){
     //Om man är inloggad, kolla ifall det bara är profil.php i URL eller om $_GET['user'] är samma som
     //inloggad användare. Laddar inloggade användarens egna profil
-    $user = test_input($_GET['user']);
-    if(!isset($_GET['user']) || $_SESSION['username'] == $_GET['user'] ){
+    if(isset($_GET['user'])){ 
+    $user = test_input($_GET['user']);}
+    if(!isset($user) || $_SESSION['username'] == $user ){
         
         $conn = create_conn();
         // Check connection
