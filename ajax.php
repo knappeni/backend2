@@ -16,8 +16,8 @@ include("smallnavbar.php");
 </head>
 
 <body>
-    <?php include("navbar.php"); ?>
     <h1>Sök annonser med hjälp av AJAX</h1>
+    <?php include("navbar.php"); ?>
     <section>
         <div class="input-group">
             <span class="input-group-addon">Sök med rubrik eller beskrivning</span>

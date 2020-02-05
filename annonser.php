@@ -13,7 +13,7 @@ include("smallnavbar.php");
     <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
 </head>
 <body>
-    <h1>Hej</h1>
+    <h1>Här ser du alla annonser på vår loppis</h1>
 <?php include("navbar.php"); ?>
 
 <section>
