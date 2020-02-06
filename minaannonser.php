@@ -12,19 +12,10 @@ include("smallnavbar.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script language="JavaScript" type="text/javascript">
-function delannons(id) {
-    if (confirm("Är du säker på att du vill radera annons '" + id + "'")) {
-        window.location.href='delete.php?delID=' +id+'';
-    }
-}
-</script>
 </head>
 <body>
     <h1>Här ser du alla annonser på vår loppis</h1>
 <?php include("navbar.php");?>
-
 
 <section>
 <?php
@@ -36,11 +27,6 @@ if ($conn->connect_error) {
 if (isset($_POST['update'])) {
     ;
 }
-
-#if (isset($_POST['delete'])) {
-    #$deleteDB = "DELETE FROM loppis WHERE id = '$_POST[hidden]'";
-    #$conn->query($deleteDB);
-#}
 
 $sql = "SELECT * FROM loppis";
 $result = $conn->query($sql);
