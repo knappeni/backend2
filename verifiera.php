@@ -17,35 +17,30 @@ include("smallnavbar.php");
 <h1>Verifierings-sida</h1>
 
 <section>
-    <?php
-       if(isset($_GET['epost']) && !empty($_GET['epost']) && isset($_GET['hash']) && !empty($_GET['hash'])){
+<?php
+    if (isset($_GET['epost']) && !empty($_GET['epost']) && isset($_GET['hash']) && !empty($_GET['hash'])) {
         // Verify data
-        
-      
         $epost = test_input($_GET['epost']); // Set email variable
         $hash = test_input($_GET['hash']); // Set blaze it variable
         $conn = create_conn();
         $sql = "SELECT epost, hash, status FROM users WHERE epost='".$epost."' AND hash='".$hash."' AND status='overifierad';";
         $result = $conn->query($sql);
        
-        if($result->num_rows > 0){
+        if ($result->num_rows > 0) {
             $sql = "UPDATE users SET status='verifierad' WHERE epost='".$epost."' AND hash='".$hash."' AND status='overifierad';";
             $conn->query($sql);
             print("<p>Ditt konto har aktiverats! Du kan nu logga in</p>");
-          
             print("<a href='login.php'>Logga In</a>");
-        }
-        else{
+        } else {
             print("<p>Ogiltig link! Ditt användarkonto är redan verifierat eller kontakta Administratören!</p>");
         }
         $conn->close();
-    }
-    else{
+    } else {
       print("<p>Ogiltig ankomst, andvänd linken i e-post meddelandet!<br>
       Du returneras till framsidan!</p>");
       header("refresh:3;url=index.php");
     }
-    ?>
+?>
 </section>
 </body>
 </html>

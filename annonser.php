@@ -19,47 +19,43 @@ include("smallnavbar.php");
 <section>
 
 <?php
-$turre = 0;
-    $conn = create_conn();
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    if (!isset($_GET['user'])) {
-        print("<p>Här ser du annonser från databasen</p>");
-        $sql = "SELECT * FROM loppis";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                print("
-                <p><b>Rubrik:</b> ".$row['rubrik']."<br>
-                <b>Beskrivning:</b> ".$row['beskrivning']."<br>
-                <b>Säljare:</b> ".$row['saljare']."<br>
-                <b>Pris:</b> ".$row['pris']."€<br>
-                <b>Annonsen uppladdad:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br></p>");
-            }
-        } else {
-            print("<p>Det finns inga annonser i databasen</p>");
+$conn = create_conn();
+if (!isset($_GET['user'])) {
+    print("<p>Här ser du annonser från databasen</p>");
+    $sql = "SELECT * FROM loppis";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            print("
+            <p><b>Rubrik:</b> ".$row['rubrik']."<br>
+            <b>Beskrivning:</b> ".$row['beskrivning']."<br>
+            <b>Säljare:</b> ".$row['saljare']."<br>
+            <b>Pris:</b> ".$row['pris']."€<br>
+            <b>Annonsen uppladdad:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br></p>");
         }
-    } elseif (isset($_GET['user']) && !empty($_GET['user'])) {
-        $user = test_input($_GET['user']);
-        print("<p>Här ser du annonser från databasen av användaren ".$user."</p>");
-        $sql = "SELECT * FROM loppis WHERE saljare='".$user."';";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-                print("<p><b>Rubrik:</b> ".$row['rubrik']."<br>
-                <b>Beskrivning:</b> ".$row['beskrivning']."<br>
-                <b>Säljare:</b> ".$row['saljare']."<br>
-                <b>Pris:</b> ".$row['pris']."€<br>
-                <b>Annonsen uppladdad:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."</p>");
-            }
-        } else {
-            print("<p>Användaren har inga annonser</p>");
-        }
+    } else {
+        print("<p>Det finns inga annonser i databasen</p>");
     }
-    // Kom ihåg att stänga databasuppkopplingen
-    $conn->close();
+} elseif (isset($_GET['user']) && !empty($_GET['user'])) {
+    $user = test_input($_GET['user']);
+    print("<p>Här ser du annonser från databasen av användaren ".$user."</p>");
+    $sql = "SELECT * FROM loppis WHERE saljare='".$user."';";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            print("<p><b>Rubrik:</b> ".$row['rubrik']."<br>
+            <b>Beskrivning:</b> ".$row['beskrivning']."<br>
+            <b>Säljare:</b> ".$row['saljare']."<br>
+            <b>Pris:</b> ".$row['pris']."€<br>
+            <b>Annonsen uppladdad:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."</p>");
+        }
+    } else {
+        print("<p>Användaren har inga annonser</p>");
+    }
+}
+// Kom ihåg att stänga databasuppkopplingen
+$conn->close();
 ?>
 </section>
 </body>

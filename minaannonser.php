@@ -20,10 +20,6 @@ include("smallnavbar.php");
 <section>
 <?php
 $conn = create_conn();
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $sql = "SELECT * FROM loppis";
 $result = $conn->query($sql);
 echo "<table border=1>
@@ -86,22 +82,6 @@ $(document).ready(function(){
     });
 });
 </script>
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.update').click(function(){
-        var updateid = $(this).data('id');
-        $.ajax({
-            url: 'uppdatera.php',
-            type: 'POST',
-            data: { id:updateid },
-            success: function(response){
-                $('#result').html(response);
-            }
-        });
-    });
-});
-</script>
-
 <?php $conn->close(); ?>
 </section>
 </body>

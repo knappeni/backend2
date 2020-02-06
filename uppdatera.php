@@ -19,15 +19,13 @@ include("smallnavbar.php");
 
 <section>
 <?php
+$conn = create_conn();
+
 if ((isset($_POST['id'])) and (isset($_POST['rubrik'])) and (isset($_POST['beskrivning'])) and (isset($_POST['pris']))) {
     $id = $_POST['id'];
     $rubrik = $_POST['rubrik'];
     $beskrivning = $_POST['beskrivning'];
     $pris = $_POST['pris'];
-    $conn = create_conn();
-    if ($conn->connect_error) {
-        die("<p>CONNECTION FAILED: ".$conn->connect_error."</p>");
-    }
     echo "<table border=1>
     <thead>
     <tr>
@@ -52,42 +50,36 @@ if ((isset($_POST['id'])) and (isset($_POST['rubrik'])) and (isset($_POST['beskr
     echo "</tbody>";
     echo "</table>";
 }
-    if (isset($_POST['update'])) {
-        $rubrik = test_input($_POST['rub']);
-        $beskrivning = test_input($_POST['besk']);
-        $pris = test_input($_POST['pri']);
-        $id = ($_POST['id']);
-        if ($rubrik == "") {
-          print("Din annons måste ha en rubrik!");
-        } elseif ($beskrivning == "") {
-          print("Din annons måste ha en beskrivning!");
-        } elseif (strlen($beskrivning) > 300) {
-          print("Din beskrivning är över 300 tecken!");
-        } elseif ($pris == "") {
-          print("Din annons måste ha ett pris!");
+if (isset($_POST['update'])) {
+    $rubrik = test_input($_POST['rub']);
+    $beskrivning = test_input($_POST['besk']);
+    $pris = test_input($_POST['pri']);
+    $id = ($_POST['id']);
+    if ($rubrik == "") {
+        print("Din annons måste ha en rubrik!");
+    } elseif ($beskrivning == "") {
+        print("Din annons måste ha en beskrivning!");
+    } elseif (strlen($beskrivning) > 300) {
+        print("Din beskrivning är över 300 tecken!");
+    } elseif ($pris == "") {
+        print("Din annons måste ha ett pris!");
+    } else {
+        $pris = str_replace(",", ".", $pris);
+        if (is_numeric($pris)) {
+        $pris = (float)$pris;
+        $sql = "UPDATE loppis SET rubrik = '$rubrik', beskrivning = '$beskrivning', pris = $pris WHERE id = $id";
+        $conn->query($sql);
+        if ($conn->affected_rows > 0) {
+            print("<p>Uppdatering lyckades!</p>");
         } else {
-          $pris = str_replace(",", ".", $pris);
-          if (is_numeric($pris)) {
-            $pris = (float)$pris;
-            $sql = "UPDATE loppis SET rubrik = '$rubrik', beskrivning = '$beskrivning', pris = $pris WHERE id = $id";
-            $conn = create_conn();
-            if ($conn->connect_error) {
-                die("<p>CONNECTION FAILED: ".$conn->connect_error."</p>");
-            }
-            $conn->query($sql);
-            if ($conn->affected_rows > 0) {
-                print("<p>Uppdatering lyckades!</p>");
-            } else {
-                print("<p>Uppdatering lyckades inte!</p>");
-            }
-          } else {
-            print("Priset kan bara innehålla siffror och en punkt eller ett komma!");
-          }
-          $conn->close();
+            print("<p>Uppdatering lyckades inte!</p>");
+        }
+        } else {
+        print("Priset kan bara innehålla siffror och en punkt eller ett komma!");
         }
     }
-
-
+}
+$conn->close();
 ?>
 </section>
 </body>
