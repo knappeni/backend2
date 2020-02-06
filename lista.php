@@ -39,10 +39,10 @@ include("smallnavbar.php");
             while ($row = $result->fetch_assoc()) {
                 $sql1 = "SELECT * FROM loppis WHERE saljare='".$row['namn']."';";
                 $rows = $conn->query($sql1);
-                print("<p><b>Användarnamn:</b> <a href='annonser.php?user=".$row['namn']."'>".$row['namn']."</a> <br>
+                print("<p><b>Användarnamn:</b> <a href='profil.php?user=".$row['namn']."'>".$row['namn']."</a> <br>
                 <b>Email:</b> ".$row['epost']."<br>
                 <b>Registrerad sedan:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br>
-                <b>Antal annonser:</b> ".$rows->num_rows."</p>");
+                <b>Antal annonser:</b><a href='annonser.php?user=".$row['namn']."'>".$rows->num_rows."</a></p>");
             }
         } else {
             print("<p>Inga användare hittades</p>");

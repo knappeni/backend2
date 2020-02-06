@@ -50,9 +50,77 @@ if(isset($_SESSION['username'])){
                         Registrerad sedan: ".$row['datum']."<br>
                         Antal annonser: ".$rows->num_rows."
                         </p>");
+                $oldlosen = $row['losen'];
+             
             };
+            
+            //editera information form
+            print("<article>
+                <form action='profil.php' method='POST'>
+                Uppdatera din Epost:<br>
+                <input type='text' name='epost'><br>
+                <br><input type='submit' name='updateEmail' value='Updatera Epost'>
+                </form>
+                <form action='profil.php' method='POST'>
+                <br>
+                Nuvarande lösenord:<br>
+                <input type='password' name='currentlosen'><br>
+                <br>
+                Nytt lösenord:(8-256 tecken)<br>
+                <input type='password' name='losen'><br>
+                Bekräfta nytt lösenord:<br>
+                <input type='password' name='losen1'><br><br>
+                <input type='submit' name='updatePsw' value='Updatera Lösenord'>
+                </form>        
+                </article>");
+            //uppdatera epost
+            if(isset($_POST['updateEmail'])){
+                $epost = test_input($_POST['epost']);
+              
+                if (filter_var($epost, FILTER_VALIDATE_EMAIL)){
+                    $sql1 = "UPDATE users SET epost='$epost' WHERE namn='".$_SESSION['username']."';";
+                    if (mysqli_query($conn, $sql1)) {
+                        print("<p>Updateringen av eposten lyckades</p>");
+                    } else {
+                        print("<p>Updateringen av eposten lyckades inte: ".mysqli_error($conn)."</p>");
+                    }
+                }
+                else{
+                    print("<p>Epost adressen är inte i rätt format, försök på nytt</p>");
+                }
+            }
+            //uppdatera lösenordet
+            if(isset($_POST['updatePsw'])){
+                $currentlosen = test_input($_POST['currentlosen']);
+                $losen = test_input($_POST['losen']);
+                $losen1 = test_input($_POST['losen1']);
+             if($oldlosen == hash('sha256',$currentlosen)){
+                  if(strlen($losen) < 8) {
+                    echo "Lösenordet är för kort";
+                } elseif (strlen($losen) > 256) {
+                    echo "Lösenordet är för långt";
+                } else{
+                    $losen_hash = hash('sha256',$losen);
+                    $losen1_hash = hash('sha256',$losen1);
+                    if ($losen_hash == $losen1_hash){
+                            $sql2 = "UPDATE users SET losen='$losen_hash' WHERE namn='".$_SESSION['username']."';";
+                                if (mysqli_query($conn, $sql2)) {
+                                    print("<p>Updateringen av lösenordet lyckades</p>");
+                                }   else {
+                                    print("<p>Updateringen av lösenordet lyckades inte: ".mysqli_error($conn)."</p>");
+                                    }
+                    }  else{
+                        print("<p>Lösenorden matchade inte</p>");
+                        }
+                    }
+                } else {
+                    print("<p>Ditt nuvarande lösenord var fel</p>");
+                    }
+                        
+                    
+            }
             $conn->close();
-            //TODO lägg till funktionalitet för att uppdatera profildata
+           
     }}
     //ifall $_GET['user'] är annat än inloggade användaren, ladda $_GET['user'] profil
     else {
