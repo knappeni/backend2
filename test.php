@@ -52,62 +52,44 @@ echo "<table border=1>
 <th>Beskrivning</th>
 <th>Pris €</th>
 <th>Uppladdad</th>
+<th>Ta bort</th>
 </tr>
 </thead>";
 while ($row = $result->fetch_assoc()) {
     $id = $row['id'];
     echo "<tbody>";
-    echo "<form action=test.php method=post>";
     echo "<tr>";
     echo "<td>".$row['id']."</td>";
     echo "<td>".$row['rubrik']."</td>";
     echo "<td>".$row['beskrivning']."</td>";
     echo "<td>".$row['pris']." €</td>";
     echo "<td>".date("d.m.Y H:i:s", strtotime($row['datum']))."</td>";
-    echo "<td>"."<input type=hidden name=hidden value=".$row['id'].">"."</td>";
-    #echo "<td>"."<input type=submit name=update value=Uppdatera>"."</td>";
-    #echo "<td>"."<input type=submit name=delete value=Radera onclick=delannons(".$row['id'].")>"."</td>";
-    echo "<td>"."<button class='delete btn btn-danger' id='del_<?= $id ?>' data-id='<?= $id ?>' >Delete</button>"."</td>";
+    echo "<td>"."<button class='delete btn btn-danger' id='del_$id' data-id='$id'>Radera</button>"."</td>";
     echo "</tr>";
-    echo "</form>";
     echo "</tbody>";
 }
 echo "</table>";
-#$conn->close();
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
-// Delete 
 $('.delete').click(function(){
-  var el = this;
-  // Delete id
   var deleteid = $(this).data('id');
-  // Confirm box
-  confirm("Do you really want to delete record!?", function(result) {
-    alert("hiii");
-     if(result){
-        alert("hiii");
-       // AJAX Request
+  var confirmation = confirm("Vill du verkligen radera annonsen?")
+     if (confirmation == true) {
        $.ajax({
-         url: 'ajaxfile.php',
+         url: 'delete.php',
          type: 'POST',
          data: { id:deleteid },
          success: function(response){
-           // Removing row from HTML Table
-           if(response == 1){
-               alert("hiii");
-                $(el).closest('tr').css('background','tomato');
-                $(el).closest('tr').fadeOut(800,function(){
-                $(this).remove();
-            });
-            }else{
-                alert('Record not deleted.');
+           if (response == 1) {
+               alert("Annonsen är raderad");
+               location.reload();
+            } else {
+                alert('Annonsen är inte raderad');
             }
          }
        });
      } 
-  });
-  alert("hiii111");
 });
 });
 </script>

@@ -1,15 +1,15 @@
 <?php
 // Sessionshantering
 include("handyfunctions.php");
-$conn = create_conn();
-#if ($conn->connect_error) {
-#    die("Connection failed: " . $conn->connect_error);
-#}
-$surr = ['hidden'];
-print($surr." hidden");
-$deleteDB = "DELETE FROM loppis WHERE id = '".$_GET['delID']."'";
-print($deleteDB);
-$conn->query($deleteDB);
-#header ("Location: test.php");
-#$conn->close();
+
+if(isset($_POST['id'])){
+    $id = $_POST['id'];
+    $conn = create_conn();
+    $sql = "DELETE FROM loppis WHERE id=".$id;
+    $conn->query($sql);
+    $conn->close();
+    echo 1;
+    exit;
+}
+echo 0;
 ?>
