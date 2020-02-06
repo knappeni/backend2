@@ -15,15 +15,7 @@ include("smallnavbar.php");
 <body>
     <h1>Här ser du alla annonser på vår loppis</h1>
 <?php include("navbar.php"); ?>
-<script>
-function deleteAnnons() { 
-  if(confirm("Are you sure you want to delete this row?")==true)
-    if (isset($_POST['radera'])){
-        ;
-    } 
-return false;
-}
-</script>
+
 <section>
 
 <?php
@@ -38,28 +30,12 @@ $turre = 0;
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                
-                print("<form method='POST' onclick='return confirm('Are you sure you want to delete this case?');'>
+                print("
                 <p><b>Rubrik:</b> ".$row['rubrik']."<br>
                 <b>Beskrivning:</b> ".$row['beskrivning']."<br>
                 <b>Säljare:</b> ".$row['saljare']."<br>
                 <b>Pris:</b> ".$row['pris']."€<br>
-                <b>Annonsen uppladdad:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br>
-                <input type='hidden' name='hidden' value='hiddenID'>
-                <input type='submit' name='radera' value='Radera annons' onclick='return deleteAnnons()'></p></form>");
-                $surreli = $row['id'];
-                print($turre);
-                $turre++;
-
-            }
-            if (isset($_POST['radera'])){
-                #$todelete = $row['id'];
-                print($surreli);
-                $byebye = delete_annons($_POST['hiddenID'] = $todelete);
-                #echo "<script type='text/javascript'>
-                #alert('Din annons är raderad!');
-                #</script>";
-            
+                <b>Annonsen uppladdad:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br></p>");
             }
         } else {
             print("<p>Det finns inga annonser i databasen</p>");

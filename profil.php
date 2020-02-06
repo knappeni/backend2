@@ -47,7 +47,7 @@ if(isset($_SESSION['username'])){
                 print("<p>Användarnamn: ".$row['namn']."<br>
                         Email: ".$row['epost']."<br>
                         Din roll är: ".$row['roll']."<br>
-                        Registrerad sedan: ".$row['datum']."<br>
+                        Registrerad sedan: ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br>
                         Antal annonser: ".$rows->num_rows."
                         </p>");
                 $oldlosen = $row['losen'];
