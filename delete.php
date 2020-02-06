@@ -2,7 +2,7 @@
 // Sessionshantering
 include("handyfunctions.php");
 
-if(isset($_POST['id'])){
+if (isset($_POST['id'])) {
     $id = $_POST['id'];
     $conn = create_conn();
     $sql = "DELETE FROM loppis WHERE id=".$id;
