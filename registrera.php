@@ -26,7 +26,7 @@ include("smallnavbar.php");
     Användarnamn: (6-50 tecken)<br>
     <input type='text' name='anvnamn' ><br>
     Epost:<br>
-    <input type='text' name='epost'><br>
+    <input type='email' name='epost'><br>
     Lösenord:(8-256 tecken)<br>
     <input type='password' name='losen'><br>
     Bekräfta lösenord:<br>

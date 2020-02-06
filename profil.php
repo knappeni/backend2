@@ -145,6 +145,18 @@ if(isset($_SESSION['username'])){
                     <b>Registrerad sedan:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br>
                     <b>Antal annonser: </b><a href='annonser.php?user=".$row['namn']."'>".$rows->num_rows."</a>
                     </p>");
+                    print("<p>Är ".$row['namn']." en skummis?<br>
+                    <form action='action_page.php'>
+                    <select name='abuse'>
+                    <option value='scammer'>Scammer</option>
+                    <option value='troll'>Troll</option>
+                    <option value='fake'>Fake Account</option>
+                    <option value='bot'>Bot</option>
+                    </select>
+                    <br><br>
+                    <input type='submit' name='report' value='Rapportera'>
+                    </form></p>");
+                    //TODO skicka abuse report till DB
                 };
             }
              else {
@@ -153,10 +165,7 @@ if(isset($_SESSION['username'])){
                 // Kom ihåg att stänga databasuppkopplingen
                 $conn->close();
         }
-    //if session user == GET user (eller om GET user är tom)
-    //visa din egen profil med möjlighet att editera din info
-    //elseif session user != GET user
-    //visa GET user profil, men ingen möjlighet för att editera
+    
     }
     else{
         print("<p>Du måste vara inloggad för att se profiler</p>");
