@@ -44,11 +44,11 @@ if(isset($_SESSION['username'])){
             while ($row = $result->fetch_assoc()) {
                 $sql1 = "SELECT * FROM loppis WHERE saljare='".$row['namn']."';";
                 $rows = $conn->query($sql1);
-                print("<p>Användarnamn: ".$row['namn']."<br>
-                        Email: ".$row['epost']."<br>
-                        Din roll är: ".$row['roll']."<br>
-                        Registrerad sedan: ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br>
-                        Antal annonser: ".$rows->num_rows."
+                print("<p><b>Användarnamn:</b> ".$row['namn']."<br>
+                        <b>Email:</b> ".$row['epost']."<br>
+                        <b>Din roll är:</b> ".$row['roll']."<br>
+                        <b>Registrerad sedan:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br>
+                        <b>Antal annonser: </b><a href='annonser.php?user=".$row['namn']."'>".$rows->num_rows."</a>
                         </p>");
                 $oldlosen = $row['losen'];
              
@@ -139,12 +139,12 @@ if(isset($_SESSION['username'])){
                  while ($row = $result->fetch_assoc()) {
                     $sql1 = "SELECT * FROM loppis WHERE saljare='".$row['namn']."';";
                     $rows = $conn->query($sql1);
-                    print("<p>Användarnamn: ".$row['namn']."<br>
-                        Email: ".$row['epost']."<br>
-                        Användaren ".$row['namn']."s roll är: ".$row['roll']."<br>
-                        Registrerad sedan: ".$row['datum']."<br>
-                        Antal annonser: ".$rows->num_rows."
-                        </p>");
+                    print("<p><b>Användarnamn:</b> ".$row['namn']."<br>
+                    <b>Email:</b> ".$row['epost']."<br>
+                    <b>Din roll är:</b> ".$row['roll']."<br>
+                    <b>Registrerad sedan:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br>
+                    <b>Antal annonser: </b><a href='annonser.php?user=".$row['namn']."'>".$rows->num_rows."</a>
+                    </p>");
                 };
             }
              else {
