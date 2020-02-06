@@ -11,10 +11,19 @@ include("smallnavbar.php");
     <title>Annonser</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+
+<script language="JavaScript" type="text/javascript">
+function delannons(id) {
+    if (confirm("Är du säker på att du vill radera annons '" + id + "'")) {
+        window.location.href='delete.php?delID=' +id+'';
+        return true;
+    }
+}
+</script>
 </head>
 <body>
     <h1>Här ser du alla annonser på vår loppis</h1>
-<?php include("navbar.php"); ?>
+<?php include("navbar.php");?>
 
 
 <section>
@@ -23,13 +32,15 @@ $conn = create_conn();
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 if (isset($_POST['update'])) {
     ;
-};
-if (isset($_POST['delete'])) {
-    $deleteDB = "DELETE FROM loppis WHERE id='$_POST[hidden]'";
-    $conn->query($deleteDB);
-};
+}
+
+#if (isset($_POST['delete'])) {
+    #$deleteDB = "DELETE FROM loppis WHERE id = '$_POST[hidden]'";
+    #$conn->query($deleteDB);
+#}
 
 $sql = "SELECT * FROM loppis";
 $result = $conn->query($sql);
@@ -51,7 +62,7 @@ while ($row = $result->fetch_assoc()) {
     echo "<td>".date("d.m.Y H:i:s", strtotime($row['datum']))."</td>";
     echo "<td>"."<input type=hidden name=hidden value=".$row['id'].">"."</td>";
     echo "<td>"."<input type=submit name=update value=Uppdatera>"."</td>";
-    echo "<td>"."<input type=submit name=delete value=Radera>"."</td>";
+    echo "<td>"."<input type=submit name=delete value=Radera onclick=delannons(".$row['id'].")>"."</td>";
     echo "</tr>";
     echo "</form>";
 }
