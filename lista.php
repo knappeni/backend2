@@ -20,14 +20,15 @@ include("smallnavbar.php");
 <?php
 if (isset($_SESSION['username'])) {
     print("<p>Här är alla användare som är registrerade till sidan.<br>
-    Klicka på användarnamnet för att visa användarens annonser.</p>");
+    Klicka på användarnamnet för att visa användarens profil.<br>
+    Klicka på siffran breve antalet annonser för att se användarens alla annonser.</p>");
     // Inloggningsuppgifterna och databasen
 
     // Create connection
     $conn = create_conn();
 
     // Uppkoppling ok, kör SQL kommandon härefter:
-    $sql = "SELECT * FROM users ORDER BY roll";
+    $sql = "SELECT * FROM users ORDER BY namn";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {

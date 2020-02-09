@@ -57,7 +57,7 @@ if (isset($_POST['matain'])) {
       VALUES('$saljare','$rubrik','$beskrivning','$pris');";
       $result = $conn->query($sql);
       if ($conn->affected_rows > 0) {
-          print("<p>Inamtning lyckades!</p>");
+          print("<p>Inmatning lyckades!</p>");
       } else {
           print("<p>Inmatning lyckades inte!</p>");
       }
