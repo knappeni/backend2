@@ -22,7 +22,7 @@ if(!isset($_SESSION['username'])) {
   print("
   <article>
   <form action='registrera.php' method='POST'>
-  Användarnamn: (6-50 tecken)<br>
+  Användarnamn: (5-20 tecken)<br>
   <input type='text' name='anvnamn' ><br>
   Epost:<br>
   <input type='email' name='epost'><br>
@@ -45,9 +45,9 @@ if(!isset($_SESSION['username'])) {
     $epost = test_input($_POST['epost']);
     $roll = "user";
     $status = "overifierad";
-    if (strlen($anvnamn) < 6) {
+    if (strlen($anvnamn) < 5) {
       echo "Användarnamnet är för kort";
-    } elseif (strlen($anvnamn) > 50) {
+    } elseif (strlen($anvnamn) > 20) {
         echo "Användarnamnet är för långt";
     } elseif (strlen($losen) < 8) {
         echo "Lösenordet är för kort";

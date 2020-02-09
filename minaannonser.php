@@ -19,45 +19,59 @@ include("smallnavbar.php");
 
 <section>
 <?php
-$conn = create_conn();
-$sql = "SELECT * FROM loppis";
-$result = $conn->query($sql);
-echo "<table border=1>
-<thead>
-<tr>
-<th>ID</th>
-<th>Rubrik</th>
-<th>Beskrivning</th>
-<th>Pris €</th>
-<th>Uppladdad</th>
-<th>Ta bort</th>
-<th>Uppdatera</th>
-</tr>
-</thead>";
-while ($row = $result->fetch_assoc()) {
-    $id = $row['id'];
-    $rubrik = $row['rubrik'];
-    $beskrivning = $row['beskrivning'];
-    $pris = $row['pris'];
-    echo "<tbody>";
-    echo "<tr>";
-    echo "<td>".$row['id']."</td>";
-    echo "<td>".$row['rubrik']."</td>";
-    echo "<td>".$row['beskrivning']."</td>";
-    echo "<td>".$row['pris']." €</td>";
-    echo "<td>".date("d.m.Y H:i:s", strtotime($row['datum']))."</td>";
-    echo "<td>"."<button class='delete' id='del_$id' data-id='$id'>Radera</button>"."</td>";
-    echo "<form action=uppdatera.php method=POST>";
-    echo "<input type=hidden name=id value=$id>";
-    echo "<input type=hidden name=rubrik value=$rubrik>";
-    echo "<input type=hidden name=beskrivning value=$beskrivning>";
-    echo "<input type=hidden name=pris value=$pris>";
-    echo "<td>"."<button class='update'>Uppdatera</button>"."</td>";
-    echo "</form>";
-    echo "</tr>";
-    echo "</tbody>";
+if (isset($_SESSION['username'])) {
+    if (isset($_GET['user'])) { 
+        $user = test_input($_GET['user']);
+    }
+    if (!isset($user) || $_SESSION['username'] == $user ) {
+        $conn = create_conn();
+        $sql = "SELECT * FROM loppis WHERE saljare = '".$_SESSION['username']."'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            echo "<table border=1>
+            <thead>
+            <tr>
+            <th>ID</th>
+            <th>Rubrik</th>
+            <th>Beskrivning</th>
+            <th>Pris €</th>
+            <th>Uppladdad</th>
+            <th>Ta bort</th>
+            <th>Uppdatera</th>
+            </tr>
+            </thead>";
+
+            while ($row = $result->fetch_assoc()) {
+                $id = $row['id'];
+                $rubrik = $row['rubrik'];
+                $beskrivning = $row['beskrivning'];
+                $pris = $row['pris'];
+                echo "<tbody>";
+                echo "<tr>";
+                echo "<td>".$row['id']."</td>";
+                echo "<td>".$row['rubrik']."</td>";
+                echo "<td>".$row['beskrivning']."</td>";
+                echo "<td>".$row['pris']." €</td>";
+                echo "<td>".date("d.m.Y H:i:s", strtotime($row['datum']))."</td>";
+                echo "<td>"."<button class='delete' id='del_$id' data-id='$id'>Radera</button>"."</td>";
+                echo "<form action=uppdatera.php method=POST>";
+                echo "<input type=hidden name=id value=$id>";
+                echo "<input type=hidden name=rubrik value=$rubrik>";
+                echo "<input type=hidden name=beskrivning value=$beskrivning>";
+                echo "<input type=hidden name=pris value=$pris>";
+                echo "<td>"."<button class='update'>Uppdatera</button>"."</td>";
+                echo "</form>";
+                echo "</tr>";
+                echo "</tbody>";
+            }
+            echo "</table>";
+        } else {
+            echo ("Du har inga annonser!");
+        }
+    }
+} else {
+    echo ("Du måste vara inloggad!");
 }
-echo "</table>";
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
