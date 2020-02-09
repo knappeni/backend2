@@ -24,22 +24,28 @@ if (isset($_SESSION['username'])) {
         echo "<table border = 1>";
         echo "<thead>";
         echo "<tr>";
-        echo "<th>"."<button class='anvandare'>Användare</button>"."</th>";
-        echo "<th>"."<button class='annonser'>Annonser</button>"."</th>";
+        echo "<th>"."<button class='anvandare'>Användare</button>"."<button class='annonser'>Annonser</button>"."</th>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>";
+        echo "<div id='result'></div>";
+        echo "</td>";
         echo "</tr>";
         echo "</thead>";
-        echo "<tbody>";
-        echo "<tr>";
-        echo "<th>"."</th>";
-        echo "</tr>";
-        echo "</tbody>";
         echo "</table>";
     } elseif ($_SESSION['roll'] == 'editor') {
-        echo "<button class='anvandare'>Användare</button>";
-        echo "<button class='annonser'>Annonser</button>";
-
-
-
+        echo "<table border = 1>";
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>"."<button class='anvandare'>Användare</button>"."<button class='annonser'>Annonser</button>"."</th>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>";
+        echo "<div id='result'></div>";
+        echo "</td>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "</table>";
 
     } else {
         echo("Du måste ha rollen admin eller editor för att se denna sida!");
@@ -47,11 +53,7 @@ if (isset($_SESSION['username'])) {
 } else {
     echo("Du måste vara inloggad!");
 }
-
 ?>
-
-<div id="result"></div>
-
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -78,6 +80,7 @@ $(document).ready(function(){
         });
     });
 });
+
 </script>
 </section>
 </body>

@@ -18,6 +18,8 @@ if (isset($_POST['annonser'])) {
         <th>Beskrivning</th>
         <th>Pris</th>
         <th>Uppladdad</th>
+        <th>Radera</th>
+        <th>Editera</th>
         </tr>
         </thead>';
         while ($row = $result->fetch_assoc()) {
@@ -27,8 +29,6 @@ if (isset($_POST['annonser'])) {
             $beskrivning = $row['beskrivning'];
             $pris = $row['pris'];
             $uppladdad = date("d.m.Y H:i:s", strtotime($row['datum']));
-            
-            #$test = $rows->fetch_assoc();
             $output .= "
                 <tbody>
                 <tr>
@@ -37,8 +37,30 @@ if (isset($_POST['annonser'])) {
                 <td>".$rubrik."</td>
                 <td>".$beskrivning."</td>
                 <td>".$pris."</td>
-                <td>".$uppladdad."</td>
+                <td>".$uppladdad."</td>";
+            if ($_SESSION['roll'] == 'admin') {
+                $output .= "
+                <td>"."<button class='delete' id='del_$id' data-id='$id'>Radera</button>"."</td>
+                <form action=uppdatera.php method=POST>
+                <input type=hidden name=id value=$id>
+                <input type=hidden name=rubrik value=$rubrik>
+                <input type=hidden name=beskrivning value=$beskrivning>
+                <input type=hidden name=pris value=$pris>
+                <td>"."<button class='update'>Uppdatera</button>"."</td>
+                </form>
                 </tr>";
+            }
+            else if ($_SESSION['roll'] == 'editor') {
+                $output .= "
+                <form action=uppdatera.php method=POST>
+                <input type=hidden name=id value=$id>
+                <input type=hidden name=rubrik value=$rubrik>
+                <input type=hidden name=beskrivning value=$beskrivning>
+                <input type=hidden name=pris value=$pris>
+                <td>"."<button class='update'>Uppdatera</button>"."</td>
+                </form>
+                </tr>";
+            }
         }
         print($output);
     } else {
@@ -59,6 +81,8 @@ if (isset($_POST['annonser'])) {
         <th>Roll</th>
         <th>Status</th>
         <th>Registrerad</th>
+        <th>Radera</th>
+        <th>Editera</th>
         </tr>
         </thead>';
         while ($row = $result->fetch_assoc()) {
@@ -68,8 +92,6 @@ if (isset($_POST['annonser'])) {
             $roll = $row['roll'];
             $status = $row['status'];
             $datum = date("d.m.Y H:i:s", strtotime($row['datum']));
-            
-            #$test = $rows->fetch_assoc();
             $output .= "
                 <tbody>
                 <tr>
@@ -78,15 +100,25 @@ if (isset($_POST['annonser'])) {
                 <td>".$epost."</td>
                 <td>".$roll."</td>
                 <td>".$status."</td>
-                <td>".$datum."</td>
+                <td>".$datum."</td>";
+            if ($_SESSION['roll'] == 'admin') {
+                $output .= "
+                <td>"."<button class='delete' id='del_$id' data-id='$id'>Radera</button>"."</td>
+                <form action=uppdatera.php method=POST>
+                <input type=hidden name=id value=$id>
+                <input type=hidden name=rubrik value=$namn>
+                <input type=hidden name=beskrivning value=$epost>
+                <input type=hidden name=pris value=$roll>
+                <input type=hidden name=pris value=$status>
+                <td>"."<button class='update'>Uppdatera</button>"."</td>
+                </form>
                 </tr>";
+            }
         }
         print($output);
     } else {
         print('Data Not Found');
     }
 }
-    #if ($data == "users") {
-    #}
 ?>
 
