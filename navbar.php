@@ -22,7 +22,7 @@ if (isset($_SESSION['username'])) {
             <a href='lista.php'>Användare</a>
             <a href='annonser.php'>Annonser</a>
             <a href='matain.php'>Ny annons</a>
-            <a href='radera.php'>Radera</a>
+            <a href='adminsida.php'>Administrationssida</a>
             <a href='ajax.php'>Sök annonser</a>");
         }
 } else {
