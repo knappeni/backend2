@@ -88,7 +88,7 @@ $(document).ready(function(){
                         alert("Annonsen är raderad");
                         location.reload();
                     } else {
-                    alert('Annonsen är inte raderad');
+                        alert('Annonsen är inte raderad');
                     }
                 }
             });

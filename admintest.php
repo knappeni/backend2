@@ -8,13 +8,13 @@ include("smallnavbar.php");
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Administrationssida</title>
+    <title>Mina annonser</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Här kan du administrera annonser och användare</h1>
+    <h1>Här ser du alla dina annonser</h1>
 <?php include("navbar.php");?>
 
 <section>
@@ -33,20 +33,6 @@ if (isset($_SESSION['username'])) {
         echo "</tr>";
         echo "</thead>";
         echo "</table>";
-    } elseif ($_SESSION['roll'] == 'editor') {
-        echo "<table border = 1>";
-        echo "<thead>";
-        echo "<tr>";
-        echo "<th>"."<button class='anvandare'>Användare</button>"."<button class='annonser'>Annonser</button>"."</th>";
-        echo "</tr>";
-        echo "<tr>";
-        echo "<td>";
-        echo "<div id='result'></div>";
-        echo "</td>";
-        echo "</tr>";
-        echo "</thead>";
-        echo "</table>";
-
     } else {
         echo("Du måste ha rollen admin eller editor för att se denna sida!");
     }
@@ -54,12 +40,11 @@ if (isset($_SESSION['username'])) {
     echo("Du måste vara inloggad!");
 }
 ?>
-
 <script type="text/javascript">
 $(document).ready(function(){
     $('.anvandare').click(function(){
         $.ajax({
-            url: 'adminfetch.php',
+            url: 'fetch.php',
             type: 'POST',
             data: {users:"users"},
             success: function(response){
@@ -86,6 +71,9 @@ $(document).ready(function(){
         } 
     });
 });
+
+
+
             }
         });
     });
@@ -93,11 +81,12 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('.annonser').click(function(){
         $.ajax({
-            url: 'adminfetch.php',
+            url: 'fetchtest.php',
             type: 'POST',
             data: {annonser:"annonser"},
             success: function(response){
                 $('#result').html(response);
+
 
                 $(document).ready(function(){
     $('.delete').click(function(){
@@ -120,10 +109,14 @@ $(document).ready(function(){
         } 
     });
 });
+
+
+
             }
         });
     });
 });
+
 
 </script>
 </section>
