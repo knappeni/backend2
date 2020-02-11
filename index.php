@@ -34,26 +34,26 @@ if (isset($_SESSION['username'])) {
 
 <h4>Specifikation för Projekt2</h4>
 <p>För projekt två valde vi att inte vara så kreativa och fortsatte på loppis idén från kursen 2019<br>
-dels för att det var samma som i fjol och dels för att Jocke hade en grund för projektet kvar från året innan.<br>
-</p>
+dels för att det var samma som i fjol och dels för att Jocke hade en grund för projektet kvar från året innan.<br></p>
 
 <p>Det finns tre olika roller på Loppis sidan, "user" som är vanliga användare, "editor" som kan editera andra användares loppis-annonser<br>
-och admins, som kan ta bort andra användares annonser och ta bort andra användare.</p>
+och "admin" som kan ta bort och editera andra användares annonser och ta bort andra användare.</p>
 
 <p>Sidans design är inte väldigt vacker eller modern, men eftersom kursen är Back-End programering, har vi försökt att<br>
 satsa mera på att ha en fungerande backend på vår sida. För tillfället kommer designen bara från en väldigt simpel .css fil.<br></p>
 
-<p>Några saker som att editor och admin kan inte för tillfället ennu editera andra användares annonser. Också "grief repporting" och "forgot password"<br>
-är ennu work in progress eller upcoming features coming soon&trade;.</p>
+<p>Några saker som att editor och admin kan inte för tillfället ennu editera andra användares annonser. Också "grief repporting", "forgot password"<br>
+och funktionalitet för att ladda upp bilder är ennu work in progress eller upcoming features coming soon&trade;.</p>
 
 <p>Användare kan dock ändra på sina egna annonser, och byta sitt lösenord och uppdatera sin epost. Detta under linkarna<br>
-"Min Profil" och "Mina Annonser"</p>
+"Min Profil" och "Mina Annonser", därav kan man alltså uppdatera data i både användar och annons tabellen.</p>
 
 <h4>Bilder och specifikationer på SQL tabellerna för annonser och användare:</h4>
 
 <h5>Användartabell</h5>
 
-<p>Tabellen för användare har 8 fält; <b>id</b> för att skapa en unik siffra för varje användare. <br>
+<p>Tabellen för användare har 8 fält;<br>
+<b>id</b> för att skapa en unik siffra för varje användare. <br>
 <b>namn</b> är användarens användarnamn på loppisen, detta kollas också att det är unikt.<br>
 <b>losen</b> är användarens lösenord, givetvis i hashat format.<br>
 <b>epost</b> är användarens epost, eposten måste vara giltig för att användaren skall få tillgång till sidan.<br>
@@ -66,7 +66,8 @@ satsa mera på att ha en fungerande backend på vår sida. För tillfället komm
 <br>
 
 <h5>Annonstabell</h5>
-<p>Tabellen för annonser har 6 fält; <b>id</b> för att skapa en unik siffra för varje annons. <br>
+<p>Tabellen för annonser har 6 fält;<br> 
+<b>id</b> för att skapa en unik siffra för varje annons. <br>
 <b>saljare</b> är namnet på användaren som har laddat upp annonsen<br>
 <b>rubrik</b> är rubriken på annonsen.<br>
 <b>beskrivning</b> är en beskrivning på annonsen, vad det är man försöker sälja.<br>
