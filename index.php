@@ -79,6 +79,10 @@ och funktionalitet för att ladda upp bilder är ennu work in progress eller upc
 <p>Jocke: Bara för att repetera så är det fortfarande tredje gången jag går den här kursen, den funkar helt bra och det känns som att man lätt får hjälp när det behövs.<br>
 Får se hur det går när vi kommer till projekt3 som jag inte har någon grund på från i fjol. Men på samma gång känns det som att det vi har hittils går ganska<br>
 bra att expandera och bygga frammåt på.</p>
+<p>Knappe: Jag har nog lärt mig helt massor om PHP och SQL dethär projektet. Synd att vi inte han få allt så fungerande som vi ville. <br>
+Satte många dagar på bara att få en administartionssida att funka var man skulle kunna delete och editera på samma sida, utan att måsta hoppa till en annan sida. <br>
+Det är säkert bara mera jquery...<br>
+Ser fram emot projekt 3. </p>
 </div>
 </body>
 </html>
