@@ -15,15 +15,6 @@ session_start();
 <h1>Välkommen till Jockes Loppis(Projekt 2)</h1>
 <?php include("navbar.php"); ?>
 <section>
-<!-- <article>
-<form action="index.php" method="get">
-Epost: <input type="text" name="epost"><br>
-Användarnamn: <input type="text" name="anvandare"><br>
-<input type="submit" name="skicka" value="Registrera">
-</form>
-
-</article>
--->
     <?php
     if(isset($_SESSION['username'])){
       print("<p>Välkommen till Jockes Loppis Sida. Man kan laga annonser, och se en lista på användare.<br>

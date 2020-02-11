@@ -19,12 +19,13 @@ include("smallnavbar.php");
 <?php
 if (isset($_SESSION['username'])) {
     print("<p>Välkommen till Jockes och Knappes Loppis Sida. Man kan laga annonser, och se en lista på användare.<br>
-    Använd linkarna i nav-baren för att navigera.</p>");
+    Använd linkarna i nav-baren för att navigera.<br>
+    </p><br><br><br><h2>Det finns tre stycken färdiga användare åt dennis :></h2><br><h3>Username: admin password: password</h3><br><h3>Username: editor password: password</h3><br><h3>Username: user password: password</h3>");
 } else {
     print("<p>Välkommen, du har inte loggat in. <br>
     Om du inte har ett användarkonto kan du laga ett.<br> 
-    Till det behöver du en GILTIG epost-adress(epost-adressen måste verifieras före du kan logga in) för att kunna logga in.
-    </p>");
+    Till det behöver du en GILTIG epost-adress(epost-adressen måste verifieras före du kan logga in) för att kunna logga in.<br>
+    </p><br><br><br><h2>Det finns tre stycken färdiga användare åt dennis :></h2><br><h3>Username: admin password: password</h3><br><h3>Username: editor password: password</h3><br><h3>Username: user password: password</h3>");
 }
 ?>
 </body>

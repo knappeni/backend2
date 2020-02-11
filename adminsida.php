@@ -66,26 +66,26 @@ $(document).ready(function(){
                 $('#result').html(response);
 
                 $(document).ready(function(){
-    $('.deleteUser').click(function(){
-        var deleteid = $(this).data('id');
-        var confirmation = confirm("Vill du verkligen radera användaren?")
-        if (confirmation == true) {
-            $.ajax({
-                url: 'deleteUser.php',
-                type: 'POST',
-                data: { id:deleteid },
-                success: function(response){
-                    if (response == 1) {
-                        alert("Användaren är raderad");
-                        location.reload();
-                    } else {
-                        alert('Användaren är inte raderad');
-                    }
-                }
-            });
-        } 
-    });
-});
+                    $('.deleteUser').click(function(){
+                        var deleteid = $(this).data('id');
+                        var confirmation = confirm("Vill du verkligen radera användaren?")
+                        if (confirmation == true) {
+                            $.ajax({
+                                url: 'deleteUser.php',
+                                type: 'POST',
+                                data: { id:deleteid },
+                                success: function(response){
+                                    if (response == 1) {
+                                        alert("Användaren är raderad");
+                                        location.reload();
+                                    } else {
+                                        alert('Användaren är inte raderad');
+                                    }
+                                }
+                            });
+                        } 
+                    });
+                });
             }
         });
     });
@@ -100,26 +100,26 @@ $(document).ready(function(){
                 $('#result').html(response);
 
                 $(document).ready(function(){
-    $('.delete').click(function(){
-        var deleteid = $(this).data('id');
-        var confirmation = confirm("Vill du verkligen radera annonsen?")
-        if (confirmation == true) {
-            $.ajax({
-                url: 'delete.php',
-                type: 'POST',
-                data: { id:deleteid },
-                success: function(response){
-                    if (response == 1) {
-                        alert("Annonsen är raderad");
-                        location.reload();
-                    } else {
-                        alert('Annonsen är inte raderad');
-                    }
-                }
-            });
-        } 
-    });
-});
+                    $('.delete').click(function(){
+                        var deleteid = $(this).data('id');
+                        var confirmation = confirm("Vill du verkligen radera annonsen?")
+                        if (confirmation == true) {
+                            $.ajax({
+                                url: 'delete.php',
+                                type: 'POST',
+                                data: { id:deleteid },
+                                success: function(response){
+                                    if (response == 1) {
+                                        alert("Annonsen är raderad");
+                                        location.reload();
+                                    } else {
+                                        alert('Annonsen är inte raderad');
+                                    }
+                                }
+                            });
+                        } 
+                    });
+                });
             }
         });
     });
