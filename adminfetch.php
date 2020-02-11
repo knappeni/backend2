@@ -103,7 +103,7 @@ if (isset($_POST['annonser'])) {
                 <td>".$datum."</td>";
             if ($_SESSION['roll'] == 'admin') {
                 $output .= "
-                <td>"."<button class='delete' id='del_$id' data-id='$id'>Radera</button>"."</td>
+                <td>"."<button class='deleteUser' id='del_$id' data-id='$id'>Radera</button>"."</td>
                 <form action=uppdatera.php method=POST>
                 <input type=hidden name=id value=$id>
                 <input type=hidden name=rubrik value=$namn>
